@@ -1,7 +1,25 @@
+
+
 body {
+  font-size: 18px;
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+    background-color: #f4f4f4;
+  }
+}
+
+/* Small screens (phones) */
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+    background-color: #f4f4f4;
+  }
 }
 
 button {

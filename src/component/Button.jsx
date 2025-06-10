@@ -1,8 +1,7 @@
-import { useState } from "react";
 
-let Button = () => {
-    const [pageNumber, setPageNumber] = useState(1);
-    return <button onClick={() => {setPageNumber}}> Load more</button>
+let Button = (props) => {
+    
+    return <button onClick={props.onclick}> {props.title}</button>
 }
 
 export default Button;

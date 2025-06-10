@@ -1,19 +1,18 @@
 import MovieCard from "./MovieCard";
-import { fetchMovieData } from "../utils/utils";
-import "../data/data"
+import { useState, useEffect } from "react";
 import Button from "./Button";
-import data from "../data/data";
+import Modal from "./Modal";
 
-let MovieList = () =>{
-    let moviData = fetchMovieData(data);
-    return(
+let MovieList = (props) =>{
+   return(
        <div>
             <div className="movie-list">
-                {moviData.map((movie) => {
-                    return ( <MovieCard key = {movie.title} title={movie.title} img={movie.img} average={movie.vote_average}/>)
-                })}  
+               {props.movies.length == 0 ? (<p>No Movie Available</p>) : ( props.movies.map((movie) => {
+                    return ( <MovieCard key = {movie.title} title={movie.title} img={movie.poster_path} average={movie.vote_average}/>)
+                }) )}
             </div>
-            <Button />
+            <Modal />
+            <Button onclick={props.handlePageLoad} title ="Load more" />
        </div>
     )
 }

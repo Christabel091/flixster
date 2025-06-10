@@ -1,4 +1,4 @@
-import "../movie.css"
+import "../style/movie.css"
 let MovieCard = (props) => {
     return(
         <div className="movie-card">
