@@ -8,7 +8,7 @@ export default function Header (props){
     return(
         <div>
             <h1>FLIXSTER</h1>
-            <Search searchForMovie = {props.searchForMovie} setInput = {props.setInput} setSearchInput= {props.setSearchInput} />
+            <Search searchForMovie = {props.searchForMovie} searchInput = {props.searchInput} setSearchInput= {props.setSearchInput} />
             <select id="movies" value={sortBy} onChange={handleSortChange}>
                 <option value="">SORT BY; </option>
                 <option value="AZ">Alphabetic order</option>
