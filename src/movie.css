@@ -1,0 +1,13 @@
+.movie-list{
+    background-color: aquamarine;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    box-sizing: border-box;
+    margin: 50px;
+    width: 60;
+}
+
+.movie-card{
+    background-color: azure;
+}
