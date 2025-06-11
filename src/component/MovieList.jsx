@@ -15,11 +15,18 @@ let MovieList = (props) =>{
         setSelectedMovie(null);
         setShowModal(false);
     }
+
+    
    return(
        <div>
             <div className="movie-list">
                {props.movies.length == 0 ? (<p>No Movie Available</p>) : ( props.movies.map((movie) => {
-                    return ( <MovieCard key = {movie.title} movie={movie} handleModalDisplay ={handleModalDisplay}/>)
+                    return ( <MovieCard 
+                        key = {movie.title} 
+                        movie={movie} 
+                        handleModalDisplay ={handleModalDisplay} 
+                        makeFavorite={props.makeFavorite} 
+                        isFavorite={props.favorites.some((fav) => fav.id === movie.id)} />)
                 }) )}
             </div>
             <Button onclick={props.handlePageLoad} title ="Load more" />
