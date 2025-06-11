@@ -42,12 +42,36 @@ const App = () => {
       fetcSearchMovies();
     }
   };
+
+  //sort funcion
+  const sortMovies = (criteria) => {
+    let sorted = [...movies];
+    switch (criteria) {
+      case "AZ":
+        sorted.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      case "rate":
+        sorted.sort((a, b) => b.vote_average - a.vote_average);
+        break;
+      case "date":
+        sorted.sort(
+          (a, b) => new Date(b.release_date) - new Date(a.release_date)
+        );
+        break;
+      default:
+        sorted = [...originalMovies];
+        break;
+    }
+    setMovies(sorted);
+  };
+
   return (
     <div className="App">
       <Header
         searchForMovie={searchForMovie}
         searchInput={searchInput}
         setSearchInput={setSearchInput}
+        sortMovies={sortMovies}
       />
       <MovieList handlePageLoad={handlePageLoad} movies={movies} />
       <Footer />
