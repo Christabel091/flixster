@@ -11,13 +11,14 @@ const App = () => {
   const [movies, setMovies] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [originalMovies, setOriginalMovies] = useState(movies);
+  const [favorites, setFavorites] = useState([]);
   //function to load initial movies
   useEffect(() => {
     const fetchMovies = async () => {
       const res = await fetch(URL);
       const data = await res.json();
 
-      setMovies(data.results);
+      setMovies(prevMovies => [...prevMovies, ...data.results]);
       setOriginalMovies(data.results);
     };
     fetchMovies();
@@ -27,7 +28,6 @@ const App = () => {
   //display when search is made
   let searchForMovie = () => {
     const URL = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(searchInput)}&page=${pageNumber}`;
-    console.log("search function ran");
     const fetcSearchMovies = async () => {
       const res = await fetch(URL);
       const data = await res.json();
@@ -62,6 +62,18 @@ const App = () => {
     }
     setMovies(sorted);
   };
+   
+  let makeFavorite =(event, movie) =>{
+    event.stopPropagation();
+    setFavorites(prev => {
+      const isfav = prev.find(m => m.id === movie.id);
+      if(isfav){
+        return prev.filter(m => m.id !== movie.id);
+      }else{
+        return [...prev, movie];
+      }
+    })
+  }
 
   return (
     <div className="App">
@@ -71,7 +83,11 @@ const App = () => {
         setSearchInput={setSearchInput}
         sortMovies={sortMovies}
       />
-      <MovieList handlePageLoad={handlePageLoad} movies={movies} />
+      <MovieList 
+      handlePageLoad={handlePageLoad} 
+      movies={movies} 
+      makeFavorite={makeFavorite} 
+      favorites={favorites} />
       <Footer />
     </div>
   );
