@@ -27,12 +27,18 @@ const App = () => {
     //display when search is made
     let searchForMovie = () =>{
       const URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&query=${encodeURIComponent(searchInput)}&page=${pageNumber}`;
-      const fetcSearchMovies = async ()=>{
+      if (searchInput === ''){
+          setMovies(originalMovies);
+      }else{
+        console.log("search function ran");
+        const fetcSearchMovies = async ()=>{
         const res = await fetch(URL);
         const data = await res.json();
-        setMovies(data.results);
+        setMovies(data.results);   
+        
+        }
+        fetcSearchMovies();
       }
-      fetcSearchMovies();
     }
   return (
     <div className="App">
