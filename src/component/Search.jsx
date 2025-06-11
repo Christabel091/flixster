@@ -5,7 +5,7 @@ let Search = (props) => {
     props.setSearchInput(event.target.value);
   };
   let clearSearchIput = () => {
-    props.setSearchInput("");
+    props.setSearchInput('');
   };
   return (
     <div className="search">

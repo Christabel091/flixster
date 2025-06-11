@@ -1,5 +1,5 @@
 .movie-list{
-    background-color: aquamarine;
+    background-color: azure;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 10px;
@@ -9,5 +9,5 @@
 }
 
 .movie-card{
-    background-color: azure;
+    background-color: aquamarine;
 }

@@ -21,28 +21,26 @@ const App = () => {
       setOriginalMovies(data.results);
     };
     fetchMovies();
-  }, [URL]);
+  }, [pageNumber]);
   const handlePageLoad = () => setPageNumber(pageNumber + 1);
 
   //display when search is made
   let searchForMovie = () => {
-    const URL = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
-      searchInput
-    )}&page=${pageNumber}`;
-
-    if (searchInput === "") {
-      setMovies(originalMovies);
-    } else {
-      console.log("search function ran");
-      const fetcSearchMovies = async () => {
-        const res = await fetch(URL);
-        const data = await res.json();
-        setMovies(data.results);
-      };
-      fetcSearchMovies();
-    }
+    const URL = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(searchInput)}&page=${pageNumber}`;
+    console.log("search function ran");
+    const fetcSearchMovies = async () => {
+      const res = await fetch(URL);
+      const data = await res.json();
+      setMovies(data.results);
+    };
+    fetcSearchMovies();
   };
-
+  //useffect to display now playing movies
+  useEffect(()=>{
+    if (searchInput === ''){
+      setMovies(originalMovies);
+    }
+  }, [searchInput])
   //sort funcion
   const sortMovies = (criteria) => {
     let sorted = [...movies];
