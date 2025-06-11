@@ -26,8 +26,7 @@ const App = () => {
     
     //display when search is made
     let searchForMovie = () =>{
-      const URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&page=${pageNumber}&query=${encodeURIComponent(searchInput)}`;
-      console.log("searcheffect run");
+      const URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&query=${encodeURIComponent(searchInput)}&page=${pageNumber}`;
       const fetcSearchMovies = async ()=>{
         const res = await fetch(URL);
         const data = await res.json();
@@ -38,7 +37,7 @@ const App = () => {
   return (
     <div className="App">
       <Header searchForMovie= {searchForMovie} searchInput={searchInput} setSearchInput={setSearchInput} />
-      <MovieList handlePageLoad= {searchInput !== '' ? {handlePageLoad}: {}} movies ={movies}/>
+      <MovieList handlePageLoad={handlePageLoad} movies ={movies}/>
       <Footer />
     </div>
   )

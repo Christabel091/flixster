@@ -1,12 +1,12 @@
 import "../style/movie.css"
 import Modal from "./Modal"
-let MovieCard = (props) => {
+let MovieCard = ({movie, handleModalDisplay}) => {
     return(
         <>
-            <div className="movie-card" onClick={() => props.handleModalDisplay}>
-                <h2 >{props.title}</h2>
-                <img src={props.img}/>
-                <p> {props.average}</p>
+            <div className="movie-card" onClick={() => handleModalDisplay(movie)}>
+                <h2 >{movie.title}</h2>
+                <img src={movie.img}/>
+                <p> {movie.average}</p>
             </div>
            
            

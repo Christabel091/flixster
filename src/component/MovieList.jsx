@@ -6,21 +6,24 @@ import Modal from "./Modal";
 let MovieList = (props) =>{
     const [showModal, setShowModal] = useState(false);
     const [selectedMovie, setSelectedMovie] = useState(null);
-    let handleModalDisplay = () =>{
+    let handleModalDisplay = (movie) =>{
         setSelectedMovie(movie);
         setShowModal(true);
-        console.log('selected movie set');
+       
+    }
+    const closeModal = () => {
+        setSelectedMovie(null);
+        setShowModal(false);
     }
    return(
        <div>
             <div className="movie-list">
                {props.movies.length == 0 ? (<p>No Movie Available</p>) : ( props.movies.map((movie) => {
-                    return ( <MovieCard key = {movie.title} title={movie.title} img={movie.poster_path} average={movie.vote_average} handleModalDisplay ={handleModalDisplay}/>)
+                    return ( <MovieCard key = {movie.title} movie={movie} handleModalDisplay ={handleModalDisplay}/>)
                 }) )}
             </div>
             <Button onclick={props.handlePageLoad} title ="Load more" />
-            {console.log(selectedMovie)}
-            {selectedMovie && showModal && <Modal />}
+            {selectedMovie && showModal && <Modal movie={selectedMovie} closeModal={closeModal}/>}
        </div>
        
     )

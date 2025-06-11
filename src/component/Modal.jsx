@@ -1,10 +1,13 @@
 import "../style/modal.css"
-export default function Modal (props) {
+export default function Modal ({movie, closeModal}) {
     return (
         <div className="modal-overlay">
             <div className="modal-content">
-                    <h1>{props.title}</h1>
-                     <button>Close</button>
+                    {console.log(movie)}
+                    <h1>{movie.title}</h1>
+                    <img src={movie.backdrop_path} />
+                    <p>{movie.overview}</p>
+                     <button onClick={() => closeModal()}>Close</button>
             </div>
         </div>
     );
