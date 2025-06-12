@@ -12,6 +12,7 @@ const App = () => {
   const [searchInput, setSearchInput] = useState("");
   const [originalMovies, setOriginalMovies] = useState(movies);
   const [favorites, setFavorites] = useState([]);
+  const [watched, setWatched] = useState([]);
   //function to load initial movies
   useEffect(() => {
     const fetchMovies = async () => {
@@ -75,6 +76,16 @@ const App = () => {
     })
   }
 
+  let handleWatched = (movie) => {
+      setWatched(prev => {
+          const iswatched = prev.find(m => m.id === movie.id);
+          if(iswatched){
+            return prev.filter(m => m.id !== movie.id);
+          }else{
+            return [...prev, movie];
+          }
+      })
+  }
   return (
     <div className="App">
       <Header
@@ -87,7 +98,9 @@ const App = () => {
       handlePageLoad={handlePageLoad} 
       movies={movies} 
       makeFavorite={makeFavorite} 
-      favorites={favorites} />
+      favorites={favorites} 
+      handleWatched={handleWatched}
+      />
       <Footer />
     </div>
   );
