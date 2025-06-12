@@ -1,7 +1,11 @@
+import { useState } from "react"
 import "../style/movie.css"
-import Modal from "./Modal"
-let MovieCard = ({movie, handleModalDisplay, makeFavorite, isFavorite}) => {
-    
+let MovieCard = ({movie, handleModalDisplay, makeFavorite, isFavorite,  handleWatched}) => {
+    const [isChecked, setIsChecked] = useState(false)
+    let makeWatched = () =>{
+        handleWatched(movie);
+        setIsChecked(!isChecked);
+    }
     return(
         <>
             <div className="movie-card" onClick={() => handleModalDisplay(movie)}>
@@ -10,8 +14,13 @@ let MovieCard = ({movie, handleModalDisplay, makeFavorite, isFavorite}) => {
                 <img src={"https://image.tmdb.org/t/p/w500"+movie.poster_path}/>
                 <p> {movie.vote_average}</p>
                 <div className="icons">
-                   
                     <i  className={`fa-regular fa-heart ${isFavorite ? 'fa-solid liked':''}`} onClick={(e) => makeFavorite(e, movie)}></i>
+                    <input
+                        type="checkbox"
+                        checked={isChecked}
+                        onChange={makeWatched}
+                        onClick={e => e.stopPropagation()}
+                    />
                 </div>
             </div>
            

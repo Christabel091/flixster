@@ -2,7 +2,7 @@ import "../style/modal.css"
 export default function Modal ({movie, closeModal}) {
     let toWordDate = (date_str) =>{
         const now =new Date(date_str);
-        const options = { weekday: 'long', month: 'long', day: 'numeric' };
+        const options = { weekday: 'long', month: 'long', day: 'numeric', year:"numeric"};
         const formattedDate = now.toLocaleDateString('en-US', options);
         return formattedDate;
     }

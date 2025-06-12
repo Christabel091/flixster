@@ -26,7 +26,9 @@ let MovieList = (props) =>{
                         movie={movie} 
                         handleModalDisplay ={handleModalDisplay} 
                         makeFavorite={props.makeFavorite} 
-                        isFavorite={props.favorites.some((fav) => fav.id === movie.id)} />)
+                        isFavorite={props.favorites.some((fav) => fav.id === movie.id)}
+                        handleWatched={props.handleWatched}
+                        />)
                 }) )}
             </div>
             <Button onclick={props.handlePageLoad} title ="Load more" />
