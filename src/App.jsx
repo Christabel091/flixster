@@ -19,7 +19,7 @@ const App = () => {
       const res = await fetch(URL);
       const data = await res.json();
 
-      setMovies(prevMovies => [...prevMovies, ...data.results]);
+      setMovies((prevMovies) => [...prevMovies, ...data.results]);
       setOriginalMovies(data.results);
     };
     fetchMovies();
@@ -28,7 +28,9 @@ const App = () => {
 
   //display when search is made
   let searchForMovie = () => {
-    const URL = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(searchInput)}&page=${pageNumber}`;
+    const URL = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
+      searchInput
+    )}&page=${pageNumber}`;
     const fetcSearchMovies = async () => {
       const res = await fetch(URL);
       const data = await res.json();
@@ -37,11 +39,11 @@ const App = () => {
     fetcSearchMovies();
   };
   //useffect to display now playing movies
-  useEffect(()=>{
-    if (searchInput === ''){
+  useEffect(() => {
+    if (searchInput === "") {
       setMovies(originalMovies);
     }
-  }, [searchInput])
+  }, [searchInput]);
   //sort funcion
   const sortMovies = (criteria) => {
     let sorted = [...movies];
@@ -63,29 +65,29 @@ const App = () => {
     }
     setMovies(sorted);
   };
-   
-  let makeFavorite =(event, movie) =>{
+
+  let makeFavorite = (event, movie) => {
     event.stopPropagation();
-    setFavorites(prev => {
-      const isfav = prev.find(m => m.id === movie.id);
-      if(isfav){
-        return prev.filter(m => m.id !== movie.id);
-      }else{
+    setFavorites((prev) => {
+      const isfav = prev.find((m) => m.id === movie.id);
+      if (isfav) {
+        return prev.filter((m) => m.id !== movie.id);
+      } else {
         return [...prev, movie];
       }
-    })
-  }
+    });
+  };
 
   let handleWatched = (movie) => {
-      setWatched(prev => {
-          const iswatched = prev.find(m => m.id === movie.id);
-          if(iswatched){
-            return prev.filter(m => m.id !== movie.id);
-          }else{
-            return [...prev, movie];
-          }
-      })
-  }
+    setWatched((prev) => {
+      const iswatched = prev.find((m) => m.id === movie.id);
+      if (iswatched) {
+        return prev.filter((m) => m.id !== movie.id);
+      } else {
+        return [...prev, movie];
+      }
+    });
+  };
   return (
     <div className="App">
       <Header
@@ -94,12 +96,13 @@ const App = () => {
         setSearchInput={setSearchInput}
         sortMovies={sortMovies}
       />
-      <MovieList 
-      handlePageLoad={handlePageLoad} 
-      movies={movies} 
-      makeFavorite={makeFavorite} 
-      favorites={favorites} 
-      handleWatched={handleWatched}
+      <MovieList
+        handlePageLoad={handlePageLoad}
+        movies={movies}
+        makeFavorite={makeFavorite}
+        favorites={favorites}
+        handleWatched={handleWatched}
+        API_KEY={API_KEY}
       />
       <Footer />
     </div>

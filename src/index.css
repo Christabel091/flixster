@@ -1,16 +1,16 @@
-
-
 body {
   font-size: 18px;
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  color: #009f5f;
+  background: linear-gradient(to bottom, #000000, #1a1a1a);
 }
 
 @media (max-width: 768px) {
   body {
     font-size: 16px;
-    background-color: #f4f4f4;
+    color: #009f5f;
+    background: linear-gradient(to bottom, #000000, #1a1a1a);
   }
 }
 
@@ -18,20 +18,23 @@ body {
 @media (max-width: 480px) {
   body {
     font-size: 14px;
-    background-color: #f4f4f4;
+    color: #009f5f;
+    background: linear-gradient(to bottom, #000000, #1a1a1a);
   }
 }
 
 button {
-  background-color: #282c34;
-  color: white;
-  cursor: pointer;
-  font-size: 16px;
+  background-color: #009f5f;
+  color: #000;
+  border: none;
+  padding: 0.5rem 1rem;
   font-weight: bold;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #777;
-  color: white;
+  background-color: #00b26a;
 }
