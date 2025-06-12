@@ -1,5 +1,42 @@
+.container{
+  text-align: center;
+  display: flex;
+}
+.side-bar{
+  display: flex;
+  width: 30px;
+  top: 0;
+  position: sticky;
+   background-color: black;
+   margin-top: 9rem;
+   flex-direction: column;
+
+}
+.open-side-bar{
+  width: 100px;
+}
+.open-side-bar i{
+  margin-right: 1rem;
+  margin-left: 0.5rem;
+}
+.open-side-bar p{
+  margin: 0;
+  white-space: nowrap;
+}
+.my-favorites, .my-watchlist{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2.5rem;
+}
+.side:hover{
+  cursor: pointer;
+}
+.sidebarIcon{
+  overflow: hidden;
+}
 .App {
   text-align: center;
+  flex: 1;
 }
 
 @media (max-width: 600px) {
@@ -31,4 +68,55 @@
   color: #009f5f;
   text-align: center;
   z-index: 50;
+}
+
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  flex: 1;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.header h1 {
+  color: #009f5f;
+  font-size: 2rem;
+}
+
+.header .search,
+.header select {
+  flex: 0 1 auto;
+  margin-left: 1rem;
+}
+
+.header select {
+  background: #111;
+  color: #009f5f;
+  border: 1px solid #009f5f;
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.search {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.search input {
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #009f5f;
+  border-radius: 4px;
+  color: #000;
 }

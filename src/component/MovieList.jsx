@@ -23,9 +23,10 @@ let MovieList = (props) => {
           <p>No Movie Available</p>
         ) : (
           props.movies.map((movie) => {
+            console.log(movie);
             return (
               <MovieCard
-                key={movie.title}
+                key={movie.id}
                 movie={movie}
                 handleModalDisplay={handleModalDisplay}
                 makeFavorite={props.makeFavorite}

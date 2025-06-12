@@ -3,6 +3,7 @@ import { genres } from "../utils/utils";
 import { useEffect, useState } from "react";
 export default function Modal({ movie, closeModal, API_KEY }) {
   const [trailerKey, setTrailerKey] = useState("");
+  const [runtime, setRuntime] = useState(null);
   let toWordDate = (date_str) => {
     const now = new Date(date_str);
     const options = {
@@ -26,39 +27,55 @@ export default function Modal({ movie, closeModal, API_KEY }) {
     return names.join(", ");
   };
 
-  const fetchTrailerKey = async (movieId) => {
-    const res = await fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`
-    );
-    if (!res.ok) throw new Error("Failed to fetch trailers");
-    const data = await res.json();
-    return data.results;
-  };
-  const getYouTubeTrailerKey = (videos) => {
-    const trailer = videos.find(
-      (v) => v.site === "YouTube" && v.type === "Trailer"
-    );
-    return trailer ? trailer.key : null;
-  };
+  async function fetchMovieDetails(movieId, apiKey) {
+    try {
+      const videoRes = await fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}&language=en-US`
+      );
+      const videoData = await videoRes.json();
+      const ytTrailer = videoData.results.find(
+        (v) => v.site === "YouTube" && v.type === "Trailer"
+      );
+
+      const detailsRes = await fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US`
+      );
+      const detailsData = await detailsRes.json();
+
+      return {
+        trailerKey: ytTrailer ? ytTrailer.key : null,
+        runtime: detailsData.runtime,
+      };
+    } catch (err) {
+      console.error("Error:", err);
+      return { trailerKey: null, runtime: null };
+    }
+  }
 
   useEffect(() => {
-    (async () => {
-      try {
-        const videos = await fetchTrailerKey(movie.id);
-        const key = getYouTubeTrailerKey(videos);
-        setTrailerKey(key);
-      } catch (e) {
-        console.error(e);
-      }
-    })();
-  }, [movie.id]);
+    async function fetchDetails() {
+      const { trailerKey, runtime } = await fetchMovieDetails(
+        movie.id,
+        API_KEY
+      );
+      setTrailerKey(trailerKey);
+      setRuntime(runtime);
+    }
 
+    fetchDetails();
+  }, [movie.id]);
+  function convertToHoursAndMinutes(totalMinutes) {
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
+    return `${hours}h ${minutes}m`;
+  }
   return (
     <div className="modal-overlay">
       <div className="modal-content">
         <h1>{movie.title}</h1>
         <img src={"https://image.tmdb.org/t/p/w500" + movie.backdrop_path} />
-        <p>{"Overvoew: " + movie.overview}</p>
+        <p>{"runtime :" + convertToHoursAndMinutes(runtime)}</p>
+        <p>{"Overview: " + movie.overview}</p>
         <p>{displayGenre()}</p>
         <p>{"Released: " + toWordDate(movie.release_date)}</p>
         {trailerKey ? (

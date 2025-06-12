@@ -1,6 +1,7 @@
 import Search from "./Search";
 import { useState } from "react";
 import "../style/header.css";
+import "../App.css";
 export default function Header(props) {
   const [sortBy, setSortBy] = useState("");
   const handleSortChange = (event) => {
@@ -9,12 +10,13 @@ export default function Header(props) {
     props.sortMovies(selected);
   };
   return (
-    <div className="header">
+    <header className="header">
       <h1>FLIXSTER</h1>
       <Search
         searchForMovie={props.searchForMovie}
         searchInput={props.searchInput}
         setSearchInput={props.setSearchInput}
+        clear={props.clear}
       />
       <select id="movies" value={sortBy} onChange={handleSortChange}>
         <option value="">SORT BY; </option>
@@ -25,6 +27,6 @@ export default function Header(props) {
         <option value="Thriller">Thriller</option>
         <option value="Action">Action</option>
       </select>
-    </div>
+    </header>
   );
 }
