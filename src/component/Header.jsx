@@ -1,5 +1,6 @@
 import Search from "./Search";
 import { useState } from "react";
+import "../style/header.css";
 export default function Header(props) {
   const [sortBy, setSortBy] = useState("");
   const handleSortChange = (event) => {
@@ -8,7 +9,7 @@ export default function Header(props) {
     props.sortMovies(selected);
   };
   return (
-    <div>
+    <div className="header">
       <h1>FLIXSTER</h1>
       <Search
         searchForMovie={props.searchForMovie}

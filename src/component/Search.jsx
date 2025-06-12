@@ -1,11 +1,11 @@
 import Button from "./Button";
-
+import "../style/header.css";
 let Search = (props) => {
   let handleSearchChange = (event) => {
     props.setSearchInput(event.target.value);
   };
   let clearSearchIput = () => {
-    props.setSearchInput('');
+    props.setSearchInput("");
   };
   return (
     <div className="search">
