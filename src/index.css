@@ -12,14 +12,19 @@ body {
     color: #009f5f;
     background: linear-gradient(to bottom, #000000, #1a1a1a);
   }
+  .side-bar{
+    margin-top: 12rem;
+  }
 }
 
-/* Small screens (phones) */
 @media (max-width: 480px) {
   body {
     font-size: 14px;
     color: #009f5f;
     background: linear-gradient(to bottom, #000000, #1a1a1a);
+  }
+  .side-bar{
+    margin-top: 12rem;
   }
 }
 

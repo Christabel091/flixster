@@ -23,7 +23,6 @@ let MovieList = (props) => {
           <p>No Movie Available</p>
         ) : (
           props.movies.map((movie) => {
-            console.log(movie);
             return (
               <MovieCard
                 key={movie.id}
@@ -37,11 +36,16 @@ let MovieList = (props) => {
           })
         )}
       </div>
-      <Button
-        className="load-more"
-        onclick={props.handlePageLoad}
-        title="Load more"
-      />
+      <div className="movieList-button">
+        {!props.isOpen && (
+          <Button
+            className="load-more"
+            onclick={props.handlePageLoad}
+            title="Load more"
+            disabled={true}
+          />
+        )}
+      </div>
       {selectedMovie && showModal && (
         <Modal
           movie={selectedMovie}

@@ -5,7 +5,9 @@
   padding: 2rem;
   margin-top: 5rem;
 }
-
+.movieList-button{
+    margin: 2rem;
+}
 .movie-card {
   background: #111;
   border-radius: 8px;
@@ -21,12 +23,6 @@ h2 {
   margin: 0.75rem;
 }
 
-.movie-card,
-img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
 
 .movie-card,
 p {
@@ -53,13 +49,7 @@ img {
   object-fit: cover;
 }
 
-.movie-card,
-p {
-  margin: 0.75rem;
-  font-size: 1rem;
-}
 
-/* ICONS CONTAINER */
 .movie-card .icons {
   display: flex;
   justify-content: space-between;
@@ -72,10 +62,12 @@ p {
   cursor: pointer;
 }
 
-.fa-heart.liked {
+.liked  .watched{
   color: #009f5f;
 }
-
+i:hover{
+    cursor: pointer;
+}
 .movie-card input[type="checkbox"] {
   width: 1.2rem;
   height: 1.2rem;

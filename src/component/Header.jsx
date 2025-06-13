@@ -23,9 +23,6 @@ export default function Header(props) {
         <option value="AZ">Alphabetic order</option>
         <option value="rate">Rating</option>
         <option value="date">release Date</option>
-        <option value="comedy">Comedy</option>
-        <option value="Thriller">Thriller</option>
-        <option value="Action">Action</option>
       </select>
     </header>
   );
