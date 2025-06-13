@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import MovieList from "./component/MovieList";
 import "./App.css";
+import Sidebar from "./component/Sidebar";
 import Header from "./component/Header";
 import Footer from "./component/Footer";
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
   const [originalMovies, setOriginalMovies] = useState(movies);
   const [favorites, setFavorites] = useState([]);
   const [watched, setWatched] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
   //function to load initial movies
   useEffect(() => {
     const fetchMovies = async () => {
@@ -20,7 +22,9 @@ const App = () => {
       const data = await res.json();
 
       setMovies((prevMovies) => [...prevMovies, ...data.results]);
-      setOriginalMovies(data.results);
+      if (pageNumber === 1) {
+        setOriginalMovies(data.results);
+      }
     };
     fetchMovies();
   }, [pageNumber]);
@@ -39,11 +43,9 @@ const App = () => {
     fetcSearchMovies();
   };
   //useffect to display now playing movies
-  useEffect(() => {
-    if (searchInput === "") {
-      setMovies(originalMovies);
-    }
-  }, [searchInput]);
+  let clear = () => {
+    setMovies(originalMovies);
+  };
   //sort funcion
   const sortMovies = (criteria) => {
     let sorted = [...movies];
@@ -88,23 +90,48 @@ const App = () => {
       }
     });
   };
+  //show side bar
+  let showSideBar = () => {
+    setIsOpen(!isOpen);
+    {
+      !isOpen && setMovies(originalMovies);
+    }
+  };
+
+  //display favorite
+  let displayFavorite = () => {
+    setMovies(favorites);
+  };
+
+  let displayWatched = () => {
+    setMovies(watched);
+  };
   return (
-    <div className="App">
-      <Header
-        searchForMovie={searchForMovie}
-        searchInput={searchInput}
-        setSearchInput={setSearchInput}
-        sortMovies={sortMovies}
-      />
-      <MovieList
-        handlePageLoad={handlePageLoad}
-        movies={movies}
-        makeFavorite={makeFavorite}
-        favorites={favorites}
-        handleWatched={handleWatched}
-        API_KEY={API_KEY}
-      />
-      <Footer />
+    <div className="container">
+      <nav className={`side-bar ${isOpen ? "open-side-bar" : ""}`}>
+        <i onClick={showSideBar} className="fas fa-hamburger fa-2x side"></i>
+        {isOpen && (
+          <Sidebar favorites={displayFavorite} watched={displayWatched} />
+        )}
+      </nav>
+      <main className="App">
+        <Header
+          searchForMovie={searchForMovie}
+          searchInput={searchInput}
+          setSearchInput={setSearchInput}
+          sortMovies={sortMovies}
+          clear={clear}
+        />
+        <MovieList
+          handlePageLoad={handlePageLoad}
+          movies={movies}
+          makeFavorite={makeFavorite}
+          favorites={favorites}
+          handleWatched={handleWatched}
+          API_KEY={API_KEY}
+        />
+        <Footer />
+      </main>
     </div>
   );
 };
