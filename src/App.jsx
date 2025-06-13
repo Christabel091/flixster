@@ -5,7 +5,6 @@ import Sidebar from "./component/Sidebar";
 import Header from "./component/Header";
 import Footer from "./component/Footer";
 const App = () => {
-  //initial movie load
   const [pageNumber, setPageNumber] = useState(1);
   const API_KEY = import.meta.env.VITE_API_KEY;
   const URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&page=${pageNumber}`;
@@ -15,7 +14,6 @@ const App = () => {
   const [favorites, setFavorites] = useState([]);
   const [watched, setWatched] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-  //function to load initial movies
   useEffect(() => {
     const fetchMovies = async () => {
       const res = await fetch(URL);
@@ -30,7 +28,6 @@ const App = () => {
   }, [pageNumber]);
   const handlePageLoad = () => setPageNumber(pageNumber + 1);
 
-  //display when search is made
   let searchForMovie = () => {
     const URL = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
       searchInput
@@ -42,11 +39,11 @@ const App = () => {
     };
     fetcSearchMovies();
   };
-  //useffect to display now playing movies
+
   let clear = () => {
     setMovies(originalMovies);
   };
-  //sort funcion
+
   const sortMovies = (criteria) => {
     let sorted = [...movies];
     switch (criteria) {
@@ -90,15 +87,14 @@ const App = () => {
       }
     });
   };
-  //show side bar
+
   let showSideBar = () => {
     setIsOpen(!isOpen);
     {
-      !isOpen && setMovies(originalMovies);
+      isOpen && clear();
     }
   };
 
-  //display favorite
   let displayFavorite = () => {
     setMovies(favorites);
   };
@@ -109,9 +105,18 @@ const App = () => {
   return (
     <div className="container">
       <nav className={`side-bar ${isOpen ? "open-side-bar" : ""}`}>
-        <i onClick={showSideBar} className="fas fa-hamburger fa-2x side"></i>
+        <i
+          onClick={showSideBar}
+          className="fas fa-solid fa-bars fa-2x side"
+        ></i>
         {isOpen && (
-          <Sidebar favorites={displayFavorite} watched={displayWatched} />
+          <Sidebar
+            clear={clear}
+            favorites={displayFavorite}
+            watched={displayWatched}
+            setIsOpen={setIsOpen}
+            isOpen={isOpen}
+          />
         )}
       </nav>
       <main className="App">
@@ -129,6 +134,7 @@ const App = () => {
           favorites={favorites}
           handleWatched={handleWatched}
           API_KEY={API_KEY}
+          isOpen={isOpen}
         />
         <Footer />
       </main>
