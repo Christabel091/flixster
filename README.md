@@ -99,7 +99,9 @@ Deployed Application (**required**): [Flixster Deployed Site](https://flixster-k
 
 ### Walkthrough Video
 
-`ADD_EMBEDDED_CODE_HERE`
+[screen recording](https://www.loom.com/share/5126495dc23c496d957a8481b8def8f4?sid=8ac443a9-bfc3-4bba-b0c6-529d97e33fbc)
+- contrast-checker checked, screenshot below.
+![1CC26F9C-88B7-419D-8D7E-A673E19CD427](https://github.com/user-attachments/assets/41759c4e-8637-461c-97e2-6a168dbb6bba)
 
 ### Reflection
 
